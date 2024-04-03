@@ -21,5 +21,4 @@
 		<h1>Page générale</h1>
 		<p>Bonjour <?php //echo $nom; ?> ! <br><a href="logout.php">Déconnexion</a></p>			
 	 </body>	
-</html>	
-
+</html>

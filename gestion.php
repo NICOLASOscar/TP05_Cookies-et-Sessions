@@ -1,13 +1,17 @@
 <?php 
-/*
 	//Exercice 2 : QUESTION 4	
-	...; //Démarrer la session
-	if(....){ // si l'utilisateur n'est pas authentifié ou n'est pas admin
-				// => redirection vers la page d'authentification TP5.php
+		//Démarrer la session
+	session_start();
+	// si l'utilisateur n'est pas authentifié (ni client && ni admin) (utiliser les variables de sessions)
+	if(!isset($_SESSION['client']) && !isset($_SESSION['admin'])){
+	//==> redirection vers la page d'authentification TP5.php
 		header("Location:TP5.php");
 	}
 	//si l'utilisateur est un adminstrateur ==> On affiche la page
-*/
+	if(isset($_SESSION['admin'])){
+		// Récupérer le nom (login) de l'adminstrateur
+		$nom = $_SESSION['admin'];
+	}
 ?>
 		
 <!DOCTYPE html>

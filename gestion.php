@@ -28,19 +28,25 @@
 		<?php
 			//Exercice 2 : QUESTION 7 - 1 
 			
-		/*
+		
 			try{
 				
 			//Ouvrir la connexion à la bd "TP5" 
+			$connexion= new PDO('mysql:host=localhost;dbname=TP5', 'root', '');
+			
 			require("connexion.php"); //créer le fichier connexion.php				
-			$reqSQL=...; //Requete sql pour récuperer les noms des produits et leurs références de la table produit pour la catégorie boisson (CodeCategorie =1)
+			//Requete sql pour récuperer les noms des produits et leurs références de la table produit pour la catégorie boisson (CodeCategorie =1)
+			$reqSQL="SELECT ref, nom FROM produit WHERE CodeCategorie=1"; 
 			//préparer, exécuter la requête et récuperer le résultat
+			$stmt = $connexion->prepare($reqSQL);
+			$stmt->execute();
 			//Fermer la connexion
+			$connexion=null;
 			}
 			catch(Exception $e){
 				die("Erreur : " . $e->getMessage());
 			}
-		*/
+		
 		?>
 		
 		<form action="" method="post">
@@ -51,6 +57,9 @@
 				<?php					
 					//Exercice 2 : QUESTION 7 - 2
 					//parcourir le résultat de la requête ci-dessus et ajouter les options dynamiquement
+					foreach($resultat as $ligne){
+						echo "<option value='".$ligne['ref']."'>".$ligne['nom']."</option>";
+					}
 				?>
 				
 					<option value="ref1"> Nom Produit 1</option>
@@ -68,26 +77,31 @@
 		
 		<?php
 			//Exercice 2 : QUESTION 8 : script de traitement du formulaire de modification du stock				
-			/*
+			
 
-			if(...){ 
+			if(isset($_POST['Modifier'])){
 				try{
+					$connexion= new PDO('mysql:host=localhost;dbname=TP5', 'root', '');
 					//Ouvrir la connexion à la bd
 					require("connexion.php"); 
-					$quantite=...;//récuperer du formulaire la nouvelle quantite du stock
-					$ref=...;//récuperer du formulaire la ref du produit à modifier
-											
-					$reqSQL=...;// requete pour modifier le stock du produit dont la réference est $ref
+					//récuperer du formulaire la nouvelle quantite du stock
+					$quantite=$_POST['quantite'];
+					//récuperer du formulaire la ref du produit à modifier
+					$ref=$_POST['produit'];						
+					// requete pour modifier le stock du produit dont la réference est $ref
+					$reqSQL="UPDATE produit SET stock=stock+$quantite WHERE ref='$ref'";
 					//préparer et exécuter la requête
+					$stmt = $connexion->prepare($reqSQL);
+					$stmt->execute();
 					
 					echo "<p>Stock modifié</p>" ;
-						...;//Fermer la connexion
+						//Fermer la connexion
+						$connexion=null;
 				}                
 				catch(Exception $e){
 					die("Erreur : " . $e->getMessage());
 				}
 			}				
-			*/
 		?>
 		
 	 </body>	

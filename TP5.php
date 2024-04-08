@@ -11,7 +11,7 @@
 		//si un utilisateur normal (client): s'assurer que le nom et le mot-de-passe sont corrects
 			
 		//Variable de session "nom"
-		if(isset($_SESSION["client"]) && $login=="client" && $mdp=="client"){
+		if($login=="client" && $mdp=="client123"){
 			$_SESSION["nom"]= $login;
 			$_SESSION["authentifie"]=true;//Variable de session "authentifie"
 			$_SESSION["admin"]=false; //Variable de session "admin"
@@ -20,7 +20,7 @@
 		}
 		//si utilisateur Admin
 
-		else if(isset($_SESSION["admin"]) && $login=="admin" && $mdp=="admin"){
+		else if($login=="admin" && $mdp=="admin123"){
 			$_SESSION["nom"]= $login;
 			$_SESSION["authentifie"]=true;//Variable de session "authentifie"
 			$_SESSION["admin"]=true; //Variable de session "admin"
